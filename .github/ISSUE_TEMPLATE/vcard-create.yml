@@ -1,0 +1,69 @@
+name: 🆕 新增收录请求
+description: 提交一个新的组织或服务联系人信息
+title: '[New vCard]: <组织名称>'
+labels: ['enhancement', 'data']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您为本项目贡献数据！请尽量提供准确的信息。
+  - type: input
+    id: org_name
+    attributes:
+      label: 组织名称
+      placeholder: 例如：GitHub, 招商银行
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: 类别
+      description: 请选择最合适的分类
+      options:
+        - 互联网
+        - 国际服务
+        - 金融银行
+        - 出行购票
+        - 电商购物
+        - 通讯服务
+        - 快递物流
+        - 影音娱乐
+        - 应用软件
+        - 外卖订餐
+        - 汽车行业
+        - 租车代驾
+        - 房产中介
+        - 本地生活
+        - 政府机构
+        - 证券保险
+        - 其它
+    validations:
+      required: true
+  - type: textarea
+    id: phone
+    attributes:
+      label: 电话号码
+      description: 每行一个。注意：106 开头的营销/短信类号码暂不收录。
+      placeholder: |
+        400-123-4567
+        010-88888888
+  - type: textarea
+    id: email
+    attributes:
+      label: 电子邮箱
+      description: 每行一个。
+      placeholder: support@example.com
+  - type: input
+    id: website
+    attributes:
+      label: 官方网址
+      placeholder: https://www.example.com
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 提交确认
+      options:
+        - label: 我已确认上述信息真实有效
+          required: true
+        - label: 我已知晓图标（Logo）可以稍后在 PR 中提交或由维护者补充
+          required: true
