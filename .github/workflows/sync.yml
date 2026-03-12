@@ -8,6 +8,8 @@ on:
 jobs:
   sync-and-build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # 必须赋予写入权限以允许 push
 
     steps:
       - name: Checkout target repository
@@ -23,7 +25,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10
 
       - name: Install dependencies
         run: pnpm install
@@ -39,9 +41,13 @@ jobs:
           for category_dir in upstream-repo/data/*/; do
             if [ -d "$category_dir" ]; then
               category=$(basename "$category_dir")
+              # 排除掉我们手动维护的“国际服务”目录，避免被覆盖（如果上游也有同名目录）
+              if [ "$category" = "国际服务" ]; then
+                continue
+              fi
               mkdir -p "data/$category"
-              # 复制所有 yaml 和 png 文件，不覆盖本地已有的（或者根据需求决定是否覆盖）
-              # 这里使用 -n (no-clobber) 保护本地修改，如果想以上游为准可以去掉 -n
+              # 复制文件。-n 表示不覆盖本地已有的文件
+              # 如果你希望上游更新时也同步更新，可以去掉 -n，改为直接 cp
               cp -vn "$category_dir"*.yaml "data/$category/" 2>/dev/null || true
               cp -vn "$category_dir"*.png "data/$category/" 2>/dev/null || true
             fi
@@ -51,5 +57,15 @@ jobs:
       - name: Run Tests
         run: pnpm test
 
-      - name: Build Project
-        run: pnpm build
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          # 只有在有变化时才提交，防止 workflow 报错
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: sync data from upstream $(date +'%Y-%m-%d')"
+            git push
+          else
+            echo "No changes to sync."
+          fi

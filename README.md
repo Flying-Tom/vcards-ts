@@ -1,6 +1,5 @@
 # 📇 vCards-TypeScript
 
-[![Check](https://img.shields.io/github/actions/workflow/status/Flying-Tom/vcards-ts/check.yml?label=Check&logo=github)](https://github.com/Flying-Tom/vcards-ts/actions/workflows/check.yml)
 [![Release](https://img.shields.io/github/actions/workflow/status/Flying-Tom/vcards-ts/release.yml?label=Release&logo=github)](https://github.com/Flying-Tom/vcards-ts/actions/workflows/release.yml)
 [![Sync](https://img.shields.io/github/actions/workflow/status/Flying-Tom/vcards-ts/sync.yml?label=Sync&logo=github)](https://github.com/Flying-Tom/vcards-ts/actions/workflows/sync.yml)
 [![License](https://img.shields.io/github/license/Flying-Tom/vcards-ts?logo=mit)](LICENSE)
