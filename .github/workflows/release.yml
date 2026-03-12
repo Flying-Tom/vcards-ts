@@ -2,12 +2,12 @@ name: Release
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
     paths:
-      - "data/**"
-      - ".github/**"
-      - "Dockerfile"
-      - "package.json"
+      - 'data/**'
+      - '.github/**'
+      - 'Dockerfile'
+      - 'package.json'
   workflow_dispatch:
 
 jobs:

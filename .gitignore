@@ -1,9 +1,61 @@
-node_modules
-temp
-public
-dist
-build
-*.zip
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Temporary files
+temp/
+temp_icons/
+radicale/
+.cache/
+.eslintcache
+.stylelintcache
+.prettiercache
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env.bak
+
+# OS metadata
 .DS_Store
-radicale
-temp_icons
+Thumbs.db
+.Spotlight-V100
+.Trashes
+
+# IDE / Editor
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Testing
+coverage/
+.nyc_output/
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Project specific
+public/

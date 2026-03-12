@@ -19,36 +19,35 @@ const wrapPlugin = (plugin: any): Transform => {
 }
 
 const generator = () => {
-  return gulp.src('data/*/*.yaml')
+  return gulp
+    .src('data/*/*.yaml')
     .pipe(wrapPlugin(plugin_vcard))
     .pipe(rename({ extname: '.vcf' }))
     .pipe(gulp.dest('./temp'))
 }
 
 const generator_ext = () => {
-  return gulp.src('data/*/*.yaml')
+  return gulp
+    .src('data/*/*.yaml')
     .pipe(wrapPlugin(plugin_vcard_ext))
     .pipe(rename({ extname: '.vcf' }))
     .pipe(gulp.dest('./temp'))
 }
 
 const archive = () => {
-  return gulp.src('temp/**')
-    .pipe(zip('archive.zip'))
-    .pipe(gulp.dest('./public'))
+  return gulp.src('temp/**').pipe(zip('archive.zip')).pipe(gulp.dest('./public'))
 }
 
 const combine = () => {
-  return gulp.src('temp/*/*.vcf')
+  return gulp
+    .src('temp/*/*.vcf')
     .pipe(concatFolders('汇总'))
     .pipe(rename({ extname: '.all.vcf' }))
     .pipe(gulp.dest('./temp'))
 }
 
 const allinone = () => {
-  return gulp.src('temp/汇总/*.all.vcf')
-    .pipe(concat('全部.vcf'))
-    .pipe(gulp.dest('./temp/汇总'))
+  return gulp.src('temp/汇总/*.all.vcf').pipe(concat('全部.vcf')).pipe(gulp.dest('./temp/汇总'))
 }
 
 const clean = () => {
@@ -56,21 +55,20 @@ const clean = () => {
 }
 
 const createRadicale = () => {
-  const folders = fs.readdirSync('temp').filter(f =>
-    fs.statSync(path.join('temp', f)).isDirectory()
-  )
+  const folders = fs
+    .readdirSync('temp')
+    .filter((f) => fs.statSync(path.join('temp', f)).isDirectory())
 
-  folders.forEach(folder => {
+  folders.forEach((folder) => {
     const folderPath = path.join('temp', folder)
-    const fileCount = fs.readdirSync(folderPath)
-      .filter(file => file.endsWith('.vcf')).length
+    const fileCount = fs.readdirSync(folderPath).filter((file) => file.endsWith('.vcf')).length
 
     fs.writeFileSync(
       path.join(folderPath, '.Radicale.props'),
       JSON.stringify({
         'D:displayname': `${folder}(${fileCount})`,
-        tag: 'VADDRESSBOOK'
-      })
+        tag: 'VADDRESSBOOK',
+      }),
     )
   })
 
@@ -82,8 +80,7 @@ const cleanRadicale = () => {
 }
 
 const distRadicale = () => {
-  return gulp.src('temp/**', { dot: true })
-    .pipe(gulp.dest('./radicale/ios'))
+  return gulp.src('temp/**', { dot: true }).pipe(gulp.dest('./radicale/ios'))
 }
 
 const distRadicaleMacos = (done: gulp.TaskFunctionCallback) => {
@@ -91,15 +88,15 @@ const distRadicaleMacos = (done: gulp.TaskFunctionCallback) => {
   if (!fs.existsSync(allDir)) fs.mkdirSync(allDir, { recursive: true })
 
   let totalCount = 0
-  const tempFolders = fs.readdirSync('temp')
-    .filter(f => fs.statSync(path.join('temp', f)).isDirectory())
+  const tempFolders = fs
+    .readdirSync('temp')
+    .filter((f) => fs.statSync(path.join('temp', f)).isDirectory())
 
-  tempFolders.forEach(folder => {
+  tempFolders.forEach((folder) => {
     const folderPath = path.join('temp', folder)
-    const vcfFiles = fs.readdirSync(folderPath)
-      .filter(f => f.endsWith('.vcf'))
+    const vcfFiles = fs.readdirSync(folderPath).filter((f) => f.endsWith('.vcf'))
 
-    vcfFiles.forEach(file => {
+    vcfFiles.forEach((file) => {
       fs.copyFileSync(path.join(folderPath, file), path.join(allDir, file))
     })
 
@@ -110,8 +107,8 @@ const distRadicaleMacos = (done: gulp.TaskFunctionCallback) => {
     path.join(allDir, '.Radicale.props'),
     JSON.stringify({
       'D:displayname': `全部(${totalCount})`,
-      tag: 'VADDRESSBOOK'
-    })
+      tag: 'VADDRESSBOOK',
+    }),
   )
 
   done()
@@ -123,15 +120,7 @@ const radicale = gulp.series(
   generator_ext,
   createRadicale,
   cleanRadicale,
-  gulp.parallel(distRadicale, distRadicaleMacos)
+  gulp.parallel(distRadicale, distRadicaleMacos),
 )
 
-export {
-  generator,
-  generator_ext,
-  combine,
-  allinone,
-  archive,
-  build,
-  radicale
-}
+export { generator, generator_ext, combine, allinone, archive, build, radicale }

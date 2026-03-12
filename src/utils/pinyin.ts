@@ -16,7 +16,7 @@ const addPhoneticField = (text: string, fieldName: string): string => {
       ? pinyin(value, {
           toneType: 'none',
           nonZh: 'consecutive',
-          type: 'array'
+          type: 'array',
         })
           .map((item: string) => item.charAt(0).toUpperCase() + item.slice(1))
           .join(' ')

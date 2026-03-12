@@ -30,7 +30,7 @@ const plugin = (file: Vinyl, _: any, cb: (err: Error | null, file?: Vinyl) => vo
 
     // 设置基本字段
     for (const [key, value] of Object.entries(json.basic)) {
-      (vCard as any)[key] = value
+      ;(vCard as any)[key] = value
     }
 
     if (!vCard.uid) {
@@ -51,7 +51,7 @@ const plugin = (file: Vinyl, _: any, cb: (err: Error | null, file?: Vinyl) => vo
           .trim()
           .replace(/\s\+\d+/, '')
         return output ? new Date(output) : new Date()
-      } catch (e) {
+      } catch {
         return new Date()
       }
     }
@@ -63,7 +63,7 @@ const plugin = (file: Vinyl, _: any, cb: (err: Error | null, file?: Vinyl) => vo
 
     // 构建 VCF 内容
     let formatted = vCard.getFormattedString()
-    formatted = formatted.replace(/REV:[\d\-:T\.Z]+/, `REV:${rev}`)
+    formatted = formatted.replace(/REV:[\d\-:T.Z]+/, `REV:${rev}`)
     formatted = addPhoneticField(formatted, 'ORG')
 
     file.contents = Buffer.from(formatted, 'utf-8')

@@ -6,7 +6,7 @@ import { readChunkSync } from 'read-chunk'
 import imageSize from 'image-size'
 import prettyBytes from 'pretty-bytes'
 
-import isPng from "./utils/isPng.js"
+import isPng from './utils/isPng.js'
 import blockList from './const/block.js'
 import schema from './const/schema.js'
 
@@ -14,9 +14,8 @@ import schema from './const/schema.js'
 const checkImage = (t: ExecutionContext, imagePath: string): void => {
   const buffer = readChunkSync(imagePath, {
     startPosition: 0,
-    length: 8
+    length: 8,
   })
-  
 
   if (!isPng(buffer)) {
     t.fail('图片格式不合法')

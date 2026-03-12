@@ -11,11 +11,7 @@ interface YamlData {
 /**
  * Gulp 插件：读取 YAML，生成 VCF，并过滤非法手机号
  */
-const plugin = (
-  file: Vinyl,
-  _: any,
-  cb: (error: Error | null, file?: Vinyl) => void
-): void => {
+const plugin = (file: Vinyl, _: any, cb: (error: Error | null, file?: Vinyl) => void): void => {
   try {
     const path = file.path
     const data = fs.readFileSync(path, 'utf8')
@@ -31,7 +27,7 @@ const plugin = (
 
     // 赋值基本字段
     for (const [key, value] of Object.entries(json.basic)) {
-      (vCard as any)[key] = value
+      ;(vCard as any)[key] = value
     }
 
     // 过滤掉 106 开头 且长度 > 11 的号码

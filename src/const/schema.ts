@@ -1,8 +1,8 @@
-import Joi, { CustomHelpers } from 'joi'
+import Joi from 'joi'
 import libPhoneNumber from 'google-libphonenumber'
 import { CustomValidator } from 'joi'
 
-const { PhoneNumberUtil } = libPhoneNumber;
+const { PhoneNumberUtil } = libPhoneNumber
 const phoneUtil = PhoneNumberUtil.getInstance()
 
 /**
@@ -26,11 +26,10 @@ const checkPhone = (phone: unknown): boolean => {
   try {
     const number = phoneUtil.parseAndKeepRawInput(phoneStr, 'CN')
     return phoneUtil.isValidNumber(number)
-  } catch (e) {
+  } catch {
     return false
   }
 }
-
 
 // 自定义 Joi 校验器
 const phoneValidator: CustomValidator<string> = (value, helpers) => {
@@ -47,12 +46,12 @@ const schema = Joi.object({
     cellPhone: Joi.array()
       .items(
         Joi.string().custom(phoneValidator),
-        Joi.number() // number 类型作为兼容（也可以转 string 后再验证）
+        Joi.number(), // number 类型作为兼容（也可以转 string 后再验证）
       )
       .optional(),
     url: Joi.string().uri().optional(),
-    workEmail: Joi.array().items(Joi.string().email()).optional()
-  }).required()
+    workEmail: Joi.array().items(Joi.string().email()).optional(),
+  }).required(),
 })
 
 export default schema
