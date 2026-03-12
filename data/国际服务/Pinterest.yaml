@@ -1,0 +1,9 @@
+basic:
+  organization: Pinterest
+  workEmail:
+    - recommendations@discover.pinterest.com
+    - recommendations@inspire.pinterest.com
+    - recommendations@explore.pinterest.com
+    - confirm@account.pinterest.com
+    - noreply@legal.pinterest.com
+  url: https://www.pinterest.com/

@@ -1,0 +1,7 @@
+basic:
+  organization: Github
+  workEmail:
+    - notifications@github.com
+    - noreply@github.com
+    - no-reply@github.com
+  url: https://github.com/

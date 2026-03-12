@@ -1,0 +1,5 @@
+basic:
+  organization: Gmail Team
+  workEmail:
+    - forwarding-noreply@google.com
+  url: https://mail.google.com/mail/

@@ -1,0 +1,5 @@
+basic:
+  organization: Reddit
+  workEmail:
+    - noreply@reddit.com
+  url: https://www.reddit.com/

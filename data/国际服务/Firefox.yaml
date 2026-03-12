@@ -1,0 +1,6 @@
+basic:
+  organization: Mozilla 账户
+  workEmail:
+    - accounts@firefox.com
+    - firefox@e.mozilla.org
+  url: https://www.firefox.com/

@@ -1,0 +1,6 @@
+basic:
+  organization: Google AI Studio
+  workEmail:
+    - googleaistudio-noreply@google.com
+    - google-gemini-noreply@google.com
+  url: https://gemini.google.com/

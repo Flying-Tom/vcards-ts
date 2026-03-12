@@ -1,0 +1,7 @@
+basic:
+  organization: TikTok
+  workEmail:
+    - notification@service.tiktok.com
+    - newsletter@service.tiktok.com
+    - no-reply@service.tiktok.com
+  url: https://www.tiktok.com/

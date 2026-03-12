@@ -1,0 +1,7 @@
+basic:
+  organization: Google
+  workEmail:
+    - no-reply@accounts.google.com
+    - googleone-noreply@google.com
+    - families-noreply@google.com
+  url: https://google.com/

@@ -1,0 +1,5 @@
+basic:
+  organization: iTunes Store
+  workEmail:
+    - do_not_reply@email.apple.com
+  url: https://www.apple.com/itunes/

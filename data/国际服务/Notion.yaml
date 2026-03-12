@@ -1,0 +1,7 @@
+basic:
+  organization: Notion Team
+  workEmail:
+    - notify@mail.notion.so
+    - notify@updates.notion.so
+    - team@mail.notion.so
+  url: https://www.notion.so/

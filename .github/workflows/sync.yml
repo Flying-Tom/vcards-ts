@@ -1,0 +1,55 @@
+name: Sync and Deploy
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每天凌晨同步一次
+  workflow_dispatch: # 支持手动触发
+
+jobs:
+  sync-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Clone source repository
+        run: |
+          git clone --depth 1 https://github.com/metowolf/vCards.git upstream-repo
+
+      - name: Merge data from upstream
+        run: |
+          echo "Merging data from upstream..."
+          # 遍历 upstream-repo/data 下的所有分类目录
+          for category_dir in upstream-repo/data/*/; do
+            if [ -d "$category_dir" ]; then
+              category=$(basename "$category_dir")
+              mkdir -p "data/$category"
+              # 复制所有 yaml 和 png 文件，不覆盖本地已有的（或者根据需求决定是否覆盖）
+              # 这里使用 -n (no-clobber) 保护本地修改，如果想以上游为准可以去掉 -n
+              cp -vn "$category_dir"*.yaml "data/$category/" 2>/dev/null || true
+              cp -vn "$category_dir"*.png "data/$category/" 2>/dev/null || true
+            fi
+          done
+          rm -rf upstream-repo
+
+      - name: Run Tests
+        run: pnpm test
+
+      - name: Build Project
+        run: pnpm build

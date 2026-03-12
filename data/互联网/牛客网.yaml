@@ -1,0 +1,10 @@
+basic:
+  organization: 牛客网
+  cellPhone:
+    - 010-60728802
+    - 010-84873384
+  workEmail:
+    - postmaster@usermail.nowcoder.com
+    - noreply@usermail.nowcoder.com
+    - support@usermail.nowcoder.org
+  url: https://www.nowcoder.com/

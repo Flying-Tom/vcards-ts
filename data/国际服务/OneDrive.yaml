@@ -1,0 +1,6 @@
+basic:
+  organization: OneDrive
+  workEmail:
+    - photos@onedrive.com
+    - no-reply@onedrive.com
+  url: https://onedrive.live.com/

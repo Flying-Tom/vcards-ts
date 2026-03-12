@@ -1,0 +1,6 @@
+basic:
+  organization: OpenAI
+  workEmail:
+    - support@openai.com
+    - noreply@tm.openai.com
+  url: https://openai.com/

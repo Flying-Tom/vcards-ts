@@ -1,0 +1,6 @@
+basic:
+  organization: Cloudflare
+  workEmail:
+    - noreply@notify.cloudflare.com
+    - notify@cloudflarestatus.com
+  url: https://www.cloudflare.com/

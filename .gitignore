@@ -1,0 +1,9 @@
+node_modules
+temp
+public
+dist
+build
+*.zip
+.DS_Store
+radicale
+temp_icons

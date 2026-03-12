@@ -1,0 +1,6 @@
+basic:
+  organization: Instagram
+  workEmail:
+    - security@mail.instagram.com
+    - no-reply@mail.instagram.com
+  url: https://www.instagram.com/

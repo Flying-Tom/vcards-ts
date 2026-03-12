@@ -1,0 +1,7 @@
+basic:
+  organization: 中国铁路
+  cellPhone:
+    - 12306
+  workEmail:
+    - 12306@rails.com.cn
+  url: https://www.12306.cn/
